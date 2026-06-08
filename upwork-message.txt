@@ -1,6 +1,6 @@
 Built the carrier-matching agent from your spec. It reads pickup and delivery ZIPs, reasons over your carrier list with no pre-mapping, and returns matched carrier names and emails as JSON for both booking paths: rate requests to carriers, or the carrier list to your customer.
 
-Demo is live here: [STREAMLIT_LINK]
+Demo is live here: https://carrier-email-automation-demo-ndi6veqst7aruosc4wmdxd.streamlit.app
 
 Paste in any route and vehicle type to see it run. The production build goes Formspree webhook to n8n, n8n calls Claude API with the route and your full carrier CSV, Claude returns the matched set, n8n sends via SendGrid and logs the booking to your CRM. No hardcoded routing rules, no maintenance when you add carriers.
 

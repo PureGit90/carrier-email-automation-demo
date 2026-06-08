@@ -11,7 +11,7 @@
 
 Built the carrier-matching agent from your spec. It reads pickup and delivery ZIPs, reasons over your carrier list with no pre-mapping, and returns matched carrier names and emails as JSON for both booking paths.
 
-**Demo:** [STREAMLIT_LINK]
+**Demo:** https://carrier-email-automation-demo-ndi6veqst7aruosc4wmdxd.streamlit.app
 **Screenshots:** [ATTACHED]
 
 ---
