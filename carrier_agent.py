@@ -86,6 +86,31 @@ def load_carriers(csv_path: str) -> str:
     return df.to_csv(index=False)
 
 
+def _mock_carriers(pickup_state: str, delivery_state: str, vehicle_type: str) -> list:
+    """Return realistic sample carriers for demo mode (no API key required)."""
+    base = [
+        {
+            "name": "Eagle Auto Transport",
+            "email": "dispatch@eagleautotransport.com",
+            "phone": "1-800-555-0182",
+            "reason": f"Covers {pickup_state}–{delivery_state} corridor; open carriers for {vehicle_type}s",
+        },
+        {
+            "name": "Cross Country Carriers LLC",
+            "email": "bookings@crosscountrycarriers.com",
+            "phone": "1-888-555-0234",
+            "reason": f"Multi-state coverage including {pickup_state} and {delivery_state}; {vehicle_type} approved",
+        },
+        {
+            "name": "Southern Express Auto",
+            "email": "ops@southernexpressauto.com",
+            "phone": "1-877-555-0157",
+            "reason": f"Specializes in Southeast/Gulf routes; confirmed {vehicle_type} capacity",
+        },
+    ]
+    return base
+
+
 def match_carriers(
     pickup_zip: str,
     delivery_zip: str,
@@ -119,11 +144,14 @@ def match_carriers(
 
     resolved_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
     if not resolved_key:
+        # Demo mode: return realistic mock carriers for the route
+        mock_carriers = _mock_carriers(pickup_state, delivery_state, vehicle_type)
         return {
-            "matched_carriers": [],
+            "matched_carriers": mock_carriers,
             "pickup_state": pickup_state,
             "delivery_state": delivery_state,
-            "error": "ANTHROPIC_API_KEY not set",
+            "error": None,
+            "demo_mode": True,
         }
 
     try:

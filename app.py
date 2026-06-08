@@ -32,16 +32,9 @@ st.caption(
     "Formspree booking → Claude carrier match → carrier RFQ or customer notification"
 )
 
-# API key notice
 api_key = os.environ.get("ANTHROPIC_API_KEY") or st.secrets.get(
     "ANTHROPIC_API_KEY", None
 )
-if not api_key:
-    st.warning(
-        "**API key required** — set `ANTHROPIC_API_KEY` as an environment variable "
-        "or in `.streamlit/secrets.toml` before running a match.",
-        icon="⚠️",
-    )
 
 st.markdown("---")
 
@@ -140,6 +133,9 @@ with right_col:
             f"**Route:** ZIP `{pickup_zip}` ({pickup_state}) → ZIP `{delivery_zip}` ({delivery_state}) "
             f"| **Vehicle:** {vehicle_type}"
         )
+
+        if result.get("demo_mode"):
+            st.caption("Sample output — connect your carrier CSV and API key for live matching.")
 
         if error:
             st.error(f"Error from carrier agent: {error}", icon="🚨")
