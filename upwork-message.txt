@@ -1,0 +1,11 @@
+Built the carrier-matching agent from your spec. It reads pickup and delivery ZIPs, reasons over your carrier list with no pre-mapping, and returns matched carrier names and emails as JSON for both booking paths: rate requests to carriers, or the carrier list to your customer.
+
+Demo is live here: [STREAMLIT_LINK]
+
+Paste in any route and vehicle type to see it run. The production build goes Formspree webhook to n8n, n8n calls Claude API with the route and your full carrier CSV, Claude returns the matched set, n8n sends via SendGrid and logs the booking to your CRM. No hardcoded routing rules, no maintenance when you add carriers.
+
+I work with n8n and the Claude API on logistics and distributor workflows regularly. Stack: Python, Claude Haiku, n8n or Make, SendGrid.
+
+Want me to swap in your actual carrier CSV and run a few real routes before we scope the production build?
+
+Rate: $350
